@@ -1,7 +1,7 @@
 Ansible role: proxyconf
 =========
 
-Role setup http proxy variables on host
+Role setup http proxy configuration on host
 
 Requirements
 ------------
@@ -34,4 +34,5 @@ BSD
 
 Author Information
 ------------------
-it's me
+Dirk Hessenmüller
+
