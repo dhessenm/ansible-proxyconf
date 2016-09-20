@@ -1,0 +1,25 @@
+---
+
+- name: Unset proxy in global environment
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^{{ item }}'
+    state: absent
+  with_items:
+    - http_proxy
+    - HTTP_PROXY
+    - https_proxy
+    - HTTPS_PROXY
+    - no_proxy
+    - proxy
+
+- name: Unset proxy for package manager
+  lineinfile:
+    dest: /etc/apt/apt.conf
+    regexp: '^{{ item.protocol }}'
+    # create: yes
+    state: absent
+  with_items:
+    - { protocol: 'Acquire::http::proxy' }
+    - { protocol: 'Acquire::https::proxy' }
+

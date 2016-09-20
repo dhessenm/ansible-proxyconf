@@ -1,0 +1,20 @@
+---
+- include: check_vars.yml
+  when: use_proxy
+
+# set proxy
+- include: setproxy_debian.yml
+  when: ansible_os_family == 'Debian' and use_proxy
+
+- include: setproxy_redhat.yml
+  when: ansible_os_family == 'RedHat' and use_proxy 
+
+# unset proxy
+- include: unsetproxy_debian.yml
+  when: ansible_os_family == 'Debian' and not use_proxy 
+
+- include: unsetproxy_redhat.yml
+  when: ansible_os_family == 'RedHat' and not use_proxy 
+
+
+

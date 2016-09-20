@@ -1,0 +1,14 @@
+---
+#
+# Checking that required variables are set
+#
+
+- name: Fail when proxy is not defined
+  fail: msg=" Error 'proxy' not defined!"
+  when:  proxy is not defined
+
+- name: Fail when no_proxy is not defined
+  fail: msg=" Error 'no_proxy' not defined!"
+  when:  no_proxy is not defined
+
+

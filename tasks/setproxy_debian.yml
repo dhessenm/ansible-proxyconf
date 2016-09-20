@@ -1,0 +1,25 @@
+---
+
+- name: Configure the proxy in global environment
+  lineinfile:
+    dest: /etc/environment
+    regexp: '^{{ item.regexp }}'
+    line: '{{ item.regexp }}={{ item.value }}'
+  with_items:
+    - { regexp: 'http_proxy', value:  '{{ proxy }}' }
+    - { regexp: 'HTTP_PROXY', value:  '{{ proxy }}' }
+    - { regexp: 'https_proxy', value: '{{ proxy }}' }
+    - { regexp: 'HTTPS_PROXY', value: '{{ proxy }}' }
+    - { regexp: 'no_proxy', value: '{{ no_proxy }}' }
+    - { regexp: 'proxy', value: '{{ proxy }}'}
+
+- name: Configure the proxy for package manager
+  lineinfile:
+    dest: /etc/apt/apt.conf
+    regexp: '^{{ item.protocol }}'
+    line: '{{ item.protocol }} "{{ proxy }}";'
+    create: yes
+  with_items:
+    - { protocol: 'Acquire::http::proxy' }
+    - { protocol: 'Acquire::https::proxy' }
+

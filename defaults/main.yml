@@ -1,0 +1,6 @@
+---
+use_proxy: false
+proxy: 
+no_proxy: 127.0.0.1,localhost
+
+
